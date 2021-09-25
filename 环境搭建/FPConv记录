@@ -1,0 +1,42 @@
+FPConv
+pytorch1.4.0  cuda10.0   torchvision0.5.0  python=3.6
+
+source ~/.bashrc
+source activate FPConv
+cd /home/zhubin/FPConv
+cd fpconv/pointnet2
+python setup.py install
+cd ../
+conda install plyfile
+conda install pickle
+
+
+Unzip S3DIS dataset into ./dataset/Stanford3dDataset_v1.2_Aligned_Version, 
+and ******8specify the dataset path and output path in config.json*****
+
+
+cd /home/zhubin/FPConv
+cd utils
+python collect_indoor3d_data.py
+cd ..
+
+/home/zhubin/FPConv
+bash train_scannet.sh
+
+
+
+
+
+
+Tensorflow gpu 1.13 + CUDA10.0 + Python 3.7 + Ubuntu Linux 深度学习开发环境搭建和测试 【2019年3月更新】
+
+https://blog.csdn.net/TianyangQiao/article/details/88284025
+
+
+在这里我报的错是/usr/bin/ld: cannot find -lncurses
+所以安装即可，要安装的库的名字一般为lib+(-l后面的东西，这里是ncurses)+(-dev),所以要安装的是libncurses-dev
+
+sudo apt-get install libncurses-dev
+sudo apt-get install libpython3.6
+重新运行之前的命令，问题解决！
+

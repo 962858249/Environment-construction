@@ -1,0 +1,9 @@
+修改默认jupyter默认打开位置
+jupyter notebook --generate-config
+
+
+加入虚拟环境
+conda activate xxxxxx
+
+conda install ipykernel
+ python -m ipykernel install --name xxxxxxx
