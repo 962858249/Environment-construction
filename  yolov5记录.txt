@@ -1,0 +1,25 @@
+python detect.py --source 0
+
+screen -d -r train
+#screen -S train
+python train.py --data coco.yaml --cfg yolov5s.yaml --weights '' --batch-size 64
+python train.py --data coco128.yaml --cfg yolov5s.yaml --weights '' --batch-size 64
+
+cd /home/zhubin/yolov5-master/yolov5
+python train.py --data coco128.yaml --cfg yolov5s.yaml --weights '' --batch-size 1
+
+source activate yolov5
+cd /home/zhubin/0success1_yolov5-master/yolov5
+
+
+python train.py --data hand.yaml --cfg yolov5s.yaml --weights '' --batch-size 24
+
+
+python detect.py --source   '/home/zhubin/0success1_yolov5-master/yolov5/111'   --weights 'weights/best.pt'
+python train.py --data coco.yaml --cfg yolov5s.yaml --weights '' --batch-size 64
+
+
+
+
+保存自己训练好的模型权重.pt文件
+torch.save(model1.state_dict(),"my_yolov5s.pt")

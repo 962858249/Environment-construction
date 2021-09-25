@@ -1,0 +1,23 @@
+服务器：jupyter notebook --no-browser
+
+PC:
+ssh -N -f -L localhost:8888:localhost:8888 zhubing@172.18.32.56
+
+PC:ssh -N -f -L localhost:8888:localhost:8891 zhubing@172.18.32.56
+
+
+修改默认jupyter默认打开位置
+jupyter notebook --generate-config
+
+
+加入虚拟环境
+conda activate xxxxxx
+
+conda install ipykernel
+ python -m ipykernel install --name xxxxxxx
+
+
+
+conda activate yolox
+cd /mnt/data/zhubin
+jupyter notebook --no-browser

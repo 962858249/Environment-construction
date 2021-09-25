@@ -1,0 +1,46 @@
+conda create -n yolox python=3.7
+conda activate yolox
+cd /mnt/data/zhubin/yolox
+pip3 install -U pip && pip3 install -r requirements.txt(提前将pytorch版本改成==1.7.1，防止太高版本)
+
+conda install pytorch==1.7.1 torchvision==0.8.2 torchaudio==0.7.2 cudatoolkit=10.1 -c pytorch   #！！！！！！！！！！important
+虽然修改过了，但是pytorch_cuda等版本依然不匹配，所以需要再修改一下
+
+#export TORCH_CUDA_ARCH_LIST=6.2(!)
+#python3 setup.py develop
+
+conda install https://anaconda.org/brown-data-science/gcc/5.4.0/download/linux-64/gcc-5.4.0-0.tar.bz2
+pip3 install -v -e .
+
+step2:
+cd apex
+python setup.py install     #(不是原文那个)
+
+
+step3:
+pip3 install cython; pip3 install 'git+https://github.com/cocodataset/cocoapi.git#subdirectory=PythonAPI'
+
+
+如果用自己的数据集，再那个custom data 链接里面有coco128(VOC类型)的训练方法
+下面这个可有可无
+#ln -s /mnt/data/zhubin/yolox/datasets/coco128     /mnt/data/zhubin/yolox/datasets/COCO
+
+
+DEMO:
+python tools/demo.py image -n yolox-s -c /mnt/data/zhubin/yolox/weights/yolox_s.pth --path assets/dog.jpg --conf 0.25 --nms 0.45 --tsize 640 --save_result --device [cpu/gpu]
+
+TRAIN：
+python tools/train.py -f exps/example/custom/yolox_s.py -d 8 -b 64 --fp16 -o -c /mnt/data/zhubin/yolox/weights/yolox_s.pth
+
+
+
+
+
+下面这个没用
+-------------------------------------------
+conda install -c moussi gcc_impl_linux-64
+ln -s /share2/home/anconda3/envs/my_env/libexec/gcc/x86_64-conda_cos6-linux-gnu/7.3.0/gcc        /share2/home/anaconda3/my_env/bin/gcc
+conda install gcc_linux-64
+conda deactivate
+conda activate my_en
+gcc -v
